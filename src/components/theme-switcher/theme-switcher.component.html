@@ -1,0 +1,18 @@
+<app-card title="Theme Colors" [shadow]="true" [level]="3">
+  <div class="theme-switcher">
+    <div class="theme-switcher__grid">
+      @for (option of themeOptions; track option.hue) {
+        <button
+          class="theme-switcher__option"
+          [class.theme-switcher__option--active]="currentHue === option.hue"
+          [style.--option-color]="option.color"
+          (click)="changeTheme(option.hue)"
+          [attr.aria-label]="'Switch to ' + option.name + ' theme'"
+          type="button">
+          <span class="theme-switcher__color-circle"></span>
+          <span class="theme-switcher__label">{{ option.name }}</span>
+        </button>
+      }
+    </div>
+  </div>
+</app-card>

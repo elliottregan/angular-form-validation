@@ -1,0 +1,90 @@
+:host {
+  // Table properties
+  --debug-table-bg: var(--surface-color);
+  --debug-table-border: var(--surface-border-color);
+  --debug-table-header-bg: var(--bg-color);
+  --debug-table-header-text: var(--text-color);
+  --debug-table-row-border: var(--border-color-subtle);
+  --debug-table-day-text: var(--text-color);
+  --debug-table-valid-bg: var(--bg-color-success);
+  --debug-table-valid-text: var(--text-color-success);
+  --debug-table-invalid-bg: var(--bg-color-error);
+  --debug-table-invalid-text: var(--text-color-error);
+  --debug-table-error-text: var(--text-color-danger);
+  --debug-table-muted-text: var(--text-color-muted);
+
+  // Status properties
+  --status-bg: var(--bg-color-success);
+  --status-color: var(--text-color-success);
+  --status-bg-valid: var(--bg-color-success);
+  --status-color-valid: var(--text-color-success);
+  --status-bg-invalid: var(--bg-color-error);
+  --status-color-invalid: var(--text-color-error);
+
+  // Message properties
+  --message-color: var(--text-color-muted);
+  --message-color-error: var(--text-color-danger);
+}
+
+.debug-table {
+  overflow-x: auto;
+
+  &__table {
+    width: 100%;
+    background-color: var(--debug-table-bg);
+    border: 1px solid var(--debug-table-border);
+    border-radius: 8px;
+    border-collapse: collapse;
+
+    thead {
+      background-color: var(--debug-table-header-bg);
+    }
+  }
+
+  &__header {
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--debug-table-border);
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--debug-table-header-text);
+  }
+
+  &__row {
+    border-bottom: 1px solid var(--debug-table-row-border);
+  }
+
+  &__cell {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    color: var(--debug-table-header-text);
+
+    &--day {
+      font-weight: 500;
+    }
+  }
+}
+
+.status {
+  --status-bg: var(--status-bg-valid);
+  --status-color: var(--status-color-valid);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  background-color: var(--status-bg);
+  color: var(--status-color);
+
+  &--invalid {
+    --status-bg: var(--status-bg-invalid);
+    --status-color: var(--status-color-invalid);
+  }
+}
+
+.message {
+  font-size: 0.75rem;
+  color: var(--message-color);
+
+  &--error {
+    --message-color: var(--message-color-error);
+  }
+}

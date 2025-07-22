@@ -1,0 +1,19 @@
+:host {
+  // Error messages properties
+  --error-messages-margin-top: var(--spacing-xs);
+
+  // Error text properties
+  --error-text-color: var(--text-color-error);
+  --error-text-size: 0.75rem;
+  --error-text-weight: 500;
+}
+
+.error-messages {
+  margin-top: var(--error-messages-margin-top);
+}
+
+.error-text {
+  color: var(--error-text-color);
+  font-size: var(--error-text-size);
+  font-weight: var(--error-text-weight);
+}

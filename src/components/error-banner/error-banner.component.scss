@@ -1,0 +1,44 @@
+:host {
+  // Error banner properties
+  --error-banner-bg: var(--bg-color-error);
+  --error-banner-border: var(--border-color-error);
+  --error-banner-text: var(--text-color-error);
+  --error-banner-icon: var(--text-color-error);
+  --error-banner-heading-weight: 600;
+}
+
+.error-banner {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--error-banner-bg);
+  border: 1px solid var(--error-banner-border);
+  border-radius: var(--spacing-sm);
+  color: var(--error-banner-text);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  &__icon {
+    width: var(--spacing-6);
+    height: var(--spacing-6);
+    margin-right: var(--spacing-sm);
+    fill: var(--error-banner-icon);
+  }
+
+  &__heading {
+    font-weight: var(--error-banner-heading-weight);
+    margin: 0;
+  }
+
+  &__list {
+    margin: 0;
+    padding-left: var(--spacing-6);
+  }
+
+  &__item {
+    margin-bottom: var(--spacing-xs);
+  }
+}

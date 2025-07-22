@@ -1,0 +1,20 @@
+:host {
+  // Form stats properties
+  --form-stats-json-font-family: monospace;
+  --form-stats-json-font-size: 0.875rem;
+  --form-stats-json-line-height: 1.5;
+  --form-stats-json-color: var(--text-color);
+  --form-stats-json-margin: 0;
+  --form-stats-json-overflow: auto;
+}
+
+.form-stats {
+  &__json {
+    font-family: var(--form-stats-json-font-family);
+    font-size: var(--form-stats-json-font-size);
+    line-height: var(--form-stats-json-line-height);
+    color: var(--form-stats-json-color);
+    margin: var(--form-stats-json-margin);
+    overflow: var(--form-stats-json-overflow);
+  }
+}

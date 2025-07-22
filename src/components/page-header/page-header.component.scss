@@ -1,0 +1,30 @@
+:host {
+  // Header properties
+  --page-header-text-align: center;
+  --page-header-margin-bottom: var(--spacing-xl);
+
+  // Title properties
+  --page-header-title-size: 1.875rem;
+  --page-header-title-weight: bold;
+  --page-header-title-color: var(--text-color);
+  --page-header-title-margin-bottom: var(--spacing-sm);
+
+  // Description properties
+  --page-header-description-color: var(--text-color-muted);
+}
+
+.page-header {
+  text-align: var(--page-header-text-align);
+  margin-bottom: var(--page-header-margin-bottom);
+
+  &__title {
+    font-size: var(--page-header-title-size);
+    font-weight: var(--page-header-title-weight);
+    color: var(--page-header-title-color);
+    margin-bottom: var(--page-header-title-margin-bottom);
+  }
+
+  &__description {
+    color: var(--page-header-description-color);
+  }
+}

@@ -1,0 +1,54 @@
+:host {
+  // Input label properties
+  --input-label-display: block;
+  --input-label-margin-bottom: var(--spacing-xs);
+  --input-label-weight: 500;
+  --input-label-color: var(--text-color);
+
+  // Time input properties
+  --time-input-width: 100%;
+  --time-input-padding: var(--spacing-sm);
+  --time-input-border: 0.0625rem solid var(--border-color);
+  --time-input-border-radius: var(--spacing-3);
+  --time-input-font-size: 0.875rem;
+  --time-input-bg: var(--surface-color);
+  --time-input-color: var(--text-color);
+
+  // Focus state properties
+  --time-input-focus-border: var(--border-color-focus);
+  --time-input-focus-shadow: 0 0 0 var(--spacing-2) var(--shadow-color-focus);
+
+  // Disabled state properties
+  --time-input-disabled-bg: var(--bg-color-disabled);
+  --time-input-disabled-color: var(--text-color-muted);
+  --time-input-disabled-cursor: not-allowed;
+}
+
+.input-label {
+  display: var(--input-label-display);
+  margin-bottom: var(--input-label-margin-bottom);
+  font-weight: var(--input-label-weight);
+  color: var(--input-label-color);
+}
+
+.time-input {
+  width: var(--time-input-width);
+  padding: var(--time-input-padding);
+  border: var(--time-input-border);
+  border-radius: var(--time-input-border-radius);
+  font-size: var(--time-input-font-size);
+  background-color: var(--time-input-bg);
+  color: var(--time-input-color);
+
+  &:focus {
+    outline: none;
+    border-color: var(--time-input-focus-border);
+    box-shadow: var(--time-input-focus-shadow);
+  }
+
+  &:disabled {
+    background-color: var(--time-input-disabled-bg);
+    color: var(--time-input-disabled-color);
+    cursor: var(--time-input-disabled-cursor);
+  }
+}

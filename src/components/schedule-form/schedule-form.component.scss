@@ -1,0 +1,32 @@
+:host {
+  // Form container properties
+  --form-container-margin-bottom: var(--spacing-lg);
+
+  // Button group properties
+  --button-group-margin-top: var(--spacing-lg);
+
+  // Submit button properties
+  --submit-button-padding: var(--spacing-sm) var(--spacing-md);
+  --submit-button-bg: var(--bg-color-primary);
+  --submit-button-color: var(--text-color-on-primary);
+  --submit-button-border: none;
+  --submit-button-border-radius: var(--spacing-xs);
+  --submit-button-cursor: pointer;
+}
+
+.form-container {
+  margin-bottom: var(--form-container-margin-bottom);
+}
+
+.button-group {
+  margin-top: var(--button-group-margin-top);
+}
+
+.submit-button {
+  padding: var(--submit-button-padding);
+  background-color: var(--submit-button-bg);
+  color: var(--submit-button-color);
+  border: var(--submit-button-border);
+  border-radius: var(--submit-button-border-radius);
+  cursor: var(--submit-button-cursor);
+}

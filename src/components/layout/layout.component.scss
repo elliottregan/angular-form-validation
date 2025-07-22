@@ -1,0 +1,21 @@
+:host {
+  // Layout properties
+  --layout-min-height: 100vh;
+  --layout-bg: var(--bg-color);
+  --layout-padding: var(--spacing-xl) var(--spacing-md);
+
+  // Container properties
+  --container-max-width: 64rem; /* 1024px */
+  --container-margin: 0 auto;
+}
+
+.layout {
+  min-height: var(--layout-min-height);
+  background-color: var(--layout-bg);
+  padding: var(--layout-padding);
+
+  &__container {
+    max-width: var(--container-max-width);
+    margin: var(--container-margin);
+  }
+}

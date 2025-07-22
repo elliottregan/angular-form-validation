@@ -1,0 +1,10 @@
+<label [for]="inputId" class="input-label">{{ label }}</label>
+<input
+  [id]="inputId"
+  type="time"
+  [value]="value"
+  (input)="onInput($event)"
+  (blur)="onTouched()"
+  [disabled]="disabled"
+  class="time-input"
+/>

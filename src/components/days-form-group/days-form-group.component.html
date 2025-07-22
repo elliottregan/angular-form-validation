@@ -1,0 +1,36 @@
+<div [formGroup]="daysFormGroup" class="days-grid">
+  @for (day of daysOfWeek; track day) {
+    <app-card
+      [formGroupName]="day"
+      [shadow]="true"
+      [level]="3"
+      class="day-card"
+      [class.day-card--enabled]="daysFormGroup.get(day)!.get('enabled')!.value">
+      <h3 class="day-title">{{ day }}</h3>
+
+      <div class="input-group">
+        <app-checkbox-input
+          [label]="'Enable ' + day"
+          formControlName="enabled">
+        </app-checkbox-input>
+      </div>
+
+      <app-time-input
+        [label]="'Opening Time'"
+        [enableWhen]="daysFormGroup.get(day)!.get('enabled')!"
+        formControlName="open">
+      </app-time-input>
+      <app-error-message [control]="daysFormGroup.get(day)!.get('open')!"></app-error-message>
+
+      <app-time-input
+        [label]="'Closing Time'"
+        [enableWhen]="daysFormGroup.get(day)!.get('enabled')!"
+        formControlName="closed">
+      </app-time-input>
+      <app-error-message [control]="daysFormGroup.get(day)!.get('closed')!"></app-error-message>
+
+      <!-- Group-level validation errors -->
+      <app-error-message [control]="daysFormGroup.get(day)!"></app-error-message>
+    </app-card>
+  }
+</div>

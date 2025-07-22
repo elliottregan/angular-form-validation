@@ -1,0 +1,13 @@
+@if (showErrorBanner) {
+  <app-error-banner [form]="scheduleForm"></app-error-banner>
+}
+
+<form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" class="form-container">
+  <app-days-form-group #daysFormGroupComponent formControlName="days"></app-days-form-group>
+
+  <div class="button-group">
+    <button type="submit" class="submit-button">Save Schedule</button>
+  </div>
+</form>
+
+<app-debug-section [form]="daysFormGroupComponent?.internalFormGroup || scheduleForm"> </app-debug-section>
