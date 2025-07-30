@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e7598042-decf-4303-93eb-58c2a4b7b751/deploy-status)](https://app.netlify.com/projects/angular-form-validation-demo/deploys)
+
 # Angular Advanced Form Validation
 
 A sophisticated Angular 20 application demonstrating advanced reactive form validation patterns using a weekly schedule form with strict TypeScript typing and semantic CSS custom properties.
