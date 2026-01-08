@@ -27,13 +27,18 @@
 
 .days-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--days-grid-min-width), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(var(--days-grid-min-width), 1fr)
+  );
   gap: var(--days-grid-gap);
   margin-bottom: var(--days-grid-margin-bottom);
 }
 
 .day-card {
-  --card-padding: calc(var(--day-card-padding) - (1.25 * var(--card-border-width)));
+  --card-padding: calc(
+    var(--day-card-padding) - (1.25 * var(--card-border-width))
+  );
 
   &--enabled {
     --card-border-width: var(--day-card-enabled-border-width);

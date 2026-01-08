@@ -23,7 +23,10 @@
 .theme-switcher {
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--theme-switcher-grid-min-width), 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(var(--theme-switcher-grid-min-width), 1fr)
+    );
     gap: var(--theme-switcher-grid-gap);
   }
 

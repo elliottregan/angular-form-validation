@@ -8,7 +8,8 @@
           [style.--option-color]="option.color"
           (click)="changeTheme(option.hue)"
           [attr.aria-label]="'Switch to ' + option.name + ' theme'"
-          type="button">
+          type="button"
+        >
           <span class="theme-switcher__color-circle"></span>
           <span class="theme-switcher__label">{{ option.name }}</span>
         </button>

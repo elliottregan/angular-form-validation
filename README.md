@@ -44,16 +44,16 @@ The CSS system is organized into several layers:
 ```css
 :root {
   /* Hue-based color system */
-  --accent-hue: 240;   /* Primary brand color hue */
-  --error-hue: 25;     /* Error state hue */
-  --success-hue: 145;  /* Success state hue */
-  
+  --accent-hue: 240; /* Primary brand color hue */
+  --error-hue: 25; /* Error state hue */
+  --success-hue: 145; /* Success state hue */
+
   /* Spacing scale */
-  --spacing-xs: 0.25rem;   /* 4px */
-  --spacing-sm: 0.5rem;    /* 8px */
-  --spacing-md: 1rem;      /* 16px */
-  --spacing-lg: 1.5rem;    /* 24px */
-  --spacing-xl: 2rem;      /* 32px */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
   /* ... additional spacing values */
 }
 ```
@@ -64,11 +64,11 @@ Colors are defined using the [OKLCH color space](https://oklch.com/) for better 
 
 ```css
 /* Light theme example */
---color-error-50: oklch(98% 0.02 var(--error-hue));    /* Very light backgrounds */
---color-error-100: oklch(95% 0.05 var(--error-hue));   /* Light backgrounds */
---color-error-300: oklch(80% 0.12 var(--error-hue));   /* Borders */
---color-error-500: oklch(65% 0.18 var(--error-hue));   /* Primary color */
---color-error-700: oklch(45% 0.15 var(--error-hue));   /* Text */
+--color-error-50: oklch(98% 0.02 var(--error-hue)); /* Very light backgrounds */
+--color-error-100: oklch(95% 0.05 var(--error-hue)); /* Light backgrounds */
+--color-error-300: oklch(80% 0.12 var(--error-hue)); /* Borders */
+--color-error-500: oklch(65% 0.18 var(--error-hue)); /* Primary color */
+--color-error-700: oklch(45% 0.15 var(--error-hue)); /* Text */
 ```
 
 #### 3. Semantic Color Properties
@@ -100,11 +100,11 @@ Semantic properties provide meaning-based color assignments:
 For elevated components, cards, and layered interfaces:
 
 ```css
---surface-color: var(--color-surface-100);           /* Base surface */
---surface-elevated-color: var(--color-surface-50);   /* Elevated elements */
+--surface-color: var(--color-surface-100); /* Base surface */
+--surface-elevated-color: var(--color-surface-50); /* Elevated elements */
 --surface-depressed-color: var(--color-surface-200); /* Recessed areas */
---surface-overlay-color: var(--color-surface-100);   /* Modal overlays */
---surface-border-color: var(--color-surface-300);    /* Surface borders */
+--surface-overlay-color: var(--color-surface-100); /* Modal overlays */
+--surface-border-color: var(--color-surface-300); /* Surface borders */
 --surface-shadow: 0 0.0625rem 0.1875rem 0 rgba(0, 0, 0, 0.1);
 ```
 
@@ -126,7 +126,7 @@ For elevated components, cards, and layered interfaces:
 ```css
 .form-input {
   border-color: var(--border-color);
-  
+
   &.error {
     border-color: var(--border-color-error);
     background-color: var(--bg-color-error);
@@ -167,9 +167,9 @@ Update the hue values to rebrand the entire application:
 
 ```css
 :root {
-  --accent-hue: 290;   /* Purple brand */
-  --error-hue: 15;     /* Orange-red errors */
-  --success-hue: 120;  /* Pure green success */
+  --accent-hue: 290; /* Purple brand */
+  --error-hue: 15; /* Orange-red errors */
+  --success-hue: 120; /* Pure green success */
 }
 ```
 
@@ -182,7 +182,7 @@ Follow the established naming pattern:
   /* Add new primitive colors */
   --color-warning-300: oklch(80% 0.12 var(--warning-hue));
   --color-warning-700: oklch(45% 0.15 var(--warning-hue));
-  
+
   /* Add semantic properties */
   --border-color-warning: var(--color-warning-300);
   --text-color-warning: var(--color-warning-700);
@@ -218,6 +218,7 @@ Follow the established naming pattern:
 ### Validation System
 
 Custom validators handle complex scenarios:
+
 - `requiredWhenEnabled` - Conditional required validation
 - `sameOpenCloseValidator` - Prevents identical open/close times
 - `closeAfterOpenValidator` - Ensures logical time ordering
