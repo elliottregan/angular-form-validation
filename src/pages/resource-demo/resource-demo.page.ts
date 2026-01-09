@@ -37,18 +37,23 @@ export class ResourceDemoPage {
   /** Currently selected user ID - changing this triggers a refetch */
   userId = signal(1);
 
+  /** When true, requests will fail with 404 */
+  simulateError = signal(false);
+
   /** Available user IDs for selection */
   userIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   /**
    * httpResource automatically:
-   * - Tracks signal dependencies (userId)
-   * - Refetches when userId changes
+   * - Tracks signal dependencies (userId, simulateError)
+   * - Refetches when any dependency changes
    * - Provides loading/error/value signals
    * - Integrates with HttpClient interceptors
    */
   userResource = httpResource<User>(() => ({
-    url: `https://jsonplaceholder.typicode.com/users/${this.userId()}`,
+    url: this.simulateError()
+      ? `https://jsonplaceholder.typicode.com/users/${this.userId()}/invalid`
+      : `https://jsonplaceholder.typicode.com/users/${this.userId()}`,
     method: 'GET',
   }));
 
@@ -60,6 +65,7 @@ export class ResourceDemoPage {
 
   /** Computed state summary for debugging display */
   resourceState = computed(() => ({
+    simulateError: this.simulateError(),
     status: this.userResource.status(),
     isLoading: this.userResource.isLoading(),
     hasValue: this.userResource.hasValue(),
@@ -83,10 +89,11 @@ export class ResourceDemoPage {
   }
 
   /**
-   * Triggers an error by fetching a non-existent user ID.
-   * The API returns 404 for user IDs that don't exist.
+   * Toggles error simulation mode.
+   * When enabled, requests will fail with 404.
+   * This demonstrates how the resource handles errors for the same user ID.
    */
-  triggerError(): void {
-    this.userId.set(999);
+  toggleErrorMode(): void {
+    this.simulateError.update(v => !v);
   }
 }

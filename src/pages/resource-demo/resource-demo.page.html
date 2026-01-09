@@ -28,10 +28,26 @@
         <button type="button" class="reload-button" (click)="reloadUser()">
           Reload Current User
         </button>
-        <button type="button" class="error-button" (click)="triggerError()">
-          Trigger Error (ID: 999)
+        <button
+          type="button"
+          class="toggle-error-button"
+          [class.active]="simulateError()"
+          (click)="toggleErrorMode()"
+        >
+          @if (simulateError()) {
+            Error Mode: ON
+          } @else {
+            Error Mode: OFF
+          }
         </button>
       </div>
+      <p class="mode-hint">
+        @if (simulateError()) {
+          Requests will now fail with 404. Toggle off to recover.
+        } @else {
+          Toggle "Error Mode" to simulate failures for the current user.
+        }
+      </p>
     </div>
   </app-card>
 
@@ -45,6 +61,12 @@
       <div class="state-item">
         <span class="state-label">userId()</span>
         <span class="state-value">{{ userId() }}</span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">simulateError()</span>
+        <span class="state-value" [class.true]="simulateError()">
+          {{ simulateError() }}
+        </span>
       </div>
       <div class="state-item">
         <span class="state-label">status()</span>

@@ -67,13 +67,31 @@
   }
 }
 
-.error-button {
+.toggle-error-button {
   border-color: oklch(0.7 0.15 25);
   color: oklch(0.45 0.2 25);
+  transition: all 0.2s ease;
 
   &:hover {
     background-color: oklch(0.95 0.05 25);
   }
+
+  &.active {
+    background-color: oklch(0.5 0.2 25);
+    border-color: oklch(0.5 0.2 25);
+    color: white;
+
+    &:hover {
+      background-color: oklch(0.45 0.2 25);
+    }
+  }
+}
+
+.mode-hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-color-muted);
+  font-style: italic;
 }
 
 // Resource State Debug Panel
