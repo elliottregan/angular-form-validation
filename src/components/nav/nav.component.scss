@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-link {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  color: var(--text-color-muted);
+  text-decoration: none;
+  border-radius: var(--spacing-xs);
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--text-color-primary);
+    background-color: var(--bg-color-secondary);
+  }
+
+  &.active {
+    color: var(--text-color-on-primary);
+    background-color: var(--bg-color-primary);
+  }
+}
