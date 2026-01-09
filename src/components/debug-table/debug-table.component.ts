@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { DAYS_OF_WEEK } from '../../constants/schedule.constants';
 
 @Component({
   selector: 'app-debug-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   styleUrls: ['./debug-table.component.scss'],
   template: `
     <div class="debug-table">

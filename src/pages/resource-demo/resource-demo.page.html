@@ -1,0 +1,317 @@
+<app-page-header
+  title="Resource API Demo"
+  description="Demonstrating Angular's httpResource for reactive data fetching with signals"
+>
+</app-page-header>
+
+<div class="demo-container">
+  <!-- User Selection -->
+  <app-card title="Select a User" [level]="2">
+    <div class="user-selector">
+      <p class="description">
+        Click a user ID to fetch their data. The httpResource automatically
+        refetches when the userId signal changes.
+      </p>
+      <div class="user-buttons">
+        @for (id of userIds; track id) {
+          <button
+            type="button"
+            class="user-button"
+            [class.active]="userId() === id"
+            (click)="selectUser(id)"
+          >
+            {{ id }}
+          </button>
+        }
+      </div>
+      <div class="action-buttons">
+        <button type="button" class="reload-button" (click)="reloadUser()">
+          Reload Current User
+        </button>
+        <button
+          type="button"
+          class="toggle-error-button"
+          [class.active]="simulateError()"
+          (click)="toggleErrorMode()"
+        >
+          @if (simulateError()) {
+            Error Mode: ON
+          } @else {
+            Error Mode: OFF
+          }
+        </button>
+      </div>
+      <p class="mode-hint">
+        @if (simulateError()) {
+          Requests will now fail with 404. Toggle off to recover.
+        } @else {
+          Toggle "Error Mode" to simulate failures for the current user.
+        }
+      </p>
+    </div>
+  </app-card>
+
+  <!-- Resource State Debug Panel -->
+  <app-card title="Resource State (Debug)" [level]="2">
+    <p class="description">
+      This panel shows the raw resource state values. Try clicking "Trigger
+      Error" to see how the state changes, then select a valid user to recover.
+    </p>
+    <div class="state-grid">
+      <div class="state-item">
+        <span class="state-label">userId()</span>
+        <span class="state-value">{{ userId() }}</span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">simulateError()</span>
+        <span class="state-value" [class.true]="simulateError()">
+          {{ simulateError() }}
+        </span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">status()</span>
+        <span
+          class="state-value status-value"
+          [attr.data-status]="userResource.status()"
+        >
+          {{ userResource.status() }}
+        </span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">isLoading()</span>
+        <span class="state-value" [class.true]="userResource.isLoading()">
+          {{ userResource.isLoading() }}
+        </span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">hasValue()</span>
+        <span class="state-value" [class.true]="userResource.hasValue()">
+          {{ userResource.hasValue() }}
+        </span>
+      </div>
+      <div class="state-item full-width">
+        <span class="state-label">error()</span>
+        <span class="state-value error-value">
+          @if (userResource.error()) {
+            {{ userResource.error() }}
+          } @else {
+            <span class="null-value">null</span>
+          }
+        </span>
+      </div>
+      <div class="state-item full-width">
+        <span class="state-label">value()</span>
+        <pre class="state-value json-value">{{
+          resourceState().value | json
+        }}</pre>
+      </div>
+    </div>
+  </app-card>
+
+  <!-- Apollo GraphQL-style Response -->
+  <app-card title="Apollo GraphQL Response (Debug)" [level]="2">
+    <p class="description">
+      This demonstrates GraphQL Apollo-style responses where errors are returned
+      in the response body (HTTP 200) rather than as HTTP errors. The response
+      always has <code>&#123; data, errors &#125;</code> structure.
+    </p>
+
+    <div class="apollo-comparison">
+      <div class="comparison-column">
+        <h4 class="comparison-title">Resource Status</h4>
+        <div class="state-grid compact">
+          <div class="state-item">
+            <span class="state-label">status()</span>
+            <span
+              class="state-value status-value"
+              [attr.data-status]="apolloState().status"
+            >
+              {{ apolloState().status }}
+            </span>
+          </div>
+          <div class="state-item">
+            <span class="state-label">hasValue()</span>
+            <span class="state-value" [class.true]="apolloState().hasValue">
+              {{ apolloState().hasValue }}
+            </span>
+          </div>
+          <div class="state-item">
+            <span class="state-label">hasErrors</span>
+            <span
+              class="state-value"
+              [class.true]="!apolloState().hasErrors"
+              [class.error-value]="apolloState().hasErrors"
+            >
+              {{ apolloState().hasErrors }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="apollo-response-panel">
+      <h4 class="response-title">Full Response</h4>
+      <pre class="apollo-response">{{ apolloState().response | json }}</pre>
+    </div>
+
+    <div class="apollo-sections">
+      <div class="apollo-section" [class.has-data]="apolloState().data">
+        <h4 class="section-title">response.data</h4>
+        @if (apolloState().data) {
+          <pre class="section-content">{{ apolloState().data | json }}</pre>
+        } @else {
+          <p class="null-value">null</p>
+        }
+      </div>
+
+      <div class="apollo-section" [class.has-errors]="apolloState().hasErrors">
+        <h4 class="section-title">
+          response.errors
+          @if (apolloState().hasErrors) {
+            <span class="error-count">({{ apolloState().errors.length }})</span>
+          }
+        </h4>
+        @if (apolloState().hasErrors) {
+          @for (error of apolloState().errors; track $index) {
+            <div class="graphql-error">
+              <p class="error-message">{{ error.message }}</p>
+              @if (error.path) {
+                <p class="error-path">Path: {{ error.path.join('.') }}</p>
+              }
+              @if (error.extensions) {
+                <pre class="error-extensions">{{
+                  error.extensions | json
+                }}</pre>
+              }
+            </div>
+          }
+        } @else {
+          <p class="empty-array">[] (empty)</p>
+        }
+      </div>
+    </div>
+
+    <p class="note">
+      Notice: With GraphQL, <code>status()</code> is always "resolved" and
+      <code>hasValue()</code> is always true (HTTP 200). You must check
+      <code>response.errors</code> to detect failures!
+    </p>
+  </app-card>
+
+  <!-- Single User Resource -->
+  <app-card title="User Details (httpResource)" [level]="2">
+    <div class="resource-status">
+      <span class="status-badge" [class.loading]="userResource.isLoading()">
+        {{ userResource.isLoading() ? 'Loading...' : 'Ready' }}
+      </span>
+    </div>
+
+    @if (userResource.isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Fetching user data...</p>
+      </div>
+    } @else if (userResource.error()) {
+      <div class="error-state">
+        <p class="error-title">Error loading user</p>
+        <p class="error-message">{{ userResource.error() }}</p>
+      </div>
+    } @else if (userResource.hasValue()) {
+      <div class="user-details">
+        <dl class="details-list">
+          <div class="detail-row">
+            <dt>ID</dt>
+            <dd>{{ userResource.value().id }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Name</dt>
+            <dd>{{ userResource.value().name }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Email</dt>
+            <dd>{{ userResource.value().email }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Phone</dt>
+            <dd>{{ userResource.value().phone }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Website</dt>
+            <dd>{{ userResource.value().website }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Company</dt>
+            <dd>{{ userResource.value().company.name }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Slogan</dt>
+            <dd class="slogan">
+              "{{ userResource.value().company.catchPhrase }}"
+            </dd>
+          </div>
+        </dl>
+      </div>
+    }
+  </app-card>
+
+  <!-- All Users Resource -->
+  <app-card title="All Users List" [level]="2">
+    <div class="resource-status">
+      <span class="status-badge" [class.loading]="allUsersResource.isLoading()">
+        {{ allUsersResource.isLoading() ? 'Loading...' : 'Ready' }}
+      </span>
+    </div>
+
+    @if (allUsersResource.isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Fetching all users...</p>
+      </div>
+    } @else if (allUsersResource.error()) {
+      <div class="error-state">
+        <p class="error-title">Error loading users</p>
+        <p class="error-message">{{ allUsersResource.error() }}</p>
+      </div>
+    } @else if (allUsersResource.hasValue()) {
+      <div class="users-grid">
+        @for (user of allUsersResource.value(); track user.id) {
+          <div
+            class="user-card"
+            [class.selected]="userId() === user.id"
+            (click)="selectUser(user.id)"
+          >
+            <span class="user-id">{{ user.id }}</span>
+            <span class="user-name">{{ user.name }}</span>
+            <span class="user-email">{{ user.email }}</span>
+          </div>
+        }
+      </div>
+    }
+  </app-card>
+
+  <!-- Code Example -->
+  <app-card title="How it Works" [level]="2">
+    <div class="code-explanation">
+      <p>The Resource API provides reactive data fetching with signals:</p>
+      <pre class="code-block"><code>// Define a signal for the parameter
+userId = signal(1);
+
+// httpResource automatically tracks signal dependencies
+userResource = httpResource&lt;User&gt;(() => (&#123;
+  url: `https://api.example.com/users/$&#123;this.userId()&#125;`,
+  method: 'GET',
+&#125;));
+
+// Access data reactively in templates
+&#64;if (userResource.isLoading()) &#123;
+  &lt;p&gt;Loading...&lt;/p&gt;
+&#125; &#64;else if (userResource.hasValue()) &#123;
+  &lt;p&gt;&#123;&#123; userResource.value()?.name &#125;&#125;&lt;/p&gt;
+&#125;</code></pre>
+      <p class="note">
+        When <code>userId()</code> changes, the resource automatically refetches
+        the data!
+      </p>
+    </div>
+  </app-card>
+</div>

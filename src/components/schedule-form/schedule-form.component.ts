@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DebugSectionComponent } from '../debug-section/debug-section.component';
 import { ErrorBannerComponent } from '../error-banner/error-banner.component';
@@ -41,6 +41,10 @@ import { ScheduleForm } from '../../models/schedule-form.model';
   templateUrl: './schedule-form.component.html',
 })
 export class ScheduleFormComponent {
+  /** Reference to the days form group component for bulk operations */
+  @ViewChild('daysFormGroupComponent')
+  daysFormGroupComponent!: DaysFormGroupComponent;
+
   /** Controls visibility of the error banner at the top of the form */
   showErrorBanner = false;
 
@@ -68,5 +72,32 @@ export class ScheduleFormComponent {
       this.showErrorBanner = true;
       this.scheduleForm.markAllAsTouched();
     }
+  }
+
+  /**
+   * Resets the form to its initial state.
+   * Clears all values, resets validation states, and hides error banner.
+   */
+  resetForm() {
+    this.daysFormGroupComponent.resetAllDays();
+    this.showErrorBanner = false;
+    this.scheduleForm.markAsUntouched();
+    this.scheduleForm.markAsPristine();
+  }
+
+  /**
+   * Enables all days in the schedule.
+   * Delegates to the DaysFormGroupComponent for the bulk operation.
+   */
+  enableAllDays() {
+    this.daysFormGroupComponent.enableAllDays();
+  }
+
+  /**
+   * Disables all days in the schedule.
+   * Delegates to the DaysFormGroupComponent for the bulk operation.
+   */
+  disableAllDays() {
+    this.daysFormGroupComponent.disableAllDays();
   }
 }

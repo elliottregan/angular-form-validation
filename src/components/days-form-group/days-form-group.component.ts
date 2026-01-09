@@ -154,4 +154,47 @@ export class DaysFormGroupComponent implements ControlValueAccessor, Validator {
   validate(control: AbstractControl): ValidationErrors | null {
     return this.daysFormGroup.valid ? null : { daysInvalid: true };
   }
+
+  /**
+   * Enables all days by setting their 'enabled' checkbox to true.
+   * This is a bulk operation for convenience.
+   */
+  enableAllDays(): void {
+    for (const day of this.daysOfWeek) {
+      const dayGroup = this.daysFormGroup.get(day);
+      if (dayGroup) {
+        dayGroup.get('enabled')?.setValue(true);
+      }
+    }
+  }
+
+  /**
+   * Disables all days by setting their 'enabled' checkbox to false.
+   * This is a bulk operation for convenience.
+   */
+  disableAllDays(): void {
+    for (const day of this.daysOfWeek) {
+      const dayGroup = this.daysFormGroup.get(day);
+      if (dayGroup) {
+        dayGroup.get('enabled')?.setValue(false);
+      }
+    }
+  }
+
+  /**
+   * Resets all days to their initial state.
+   * Clears all time values and unchecks all enabled checkboxes.
+   */
+  resetAllDays(): void {
+    for (const day of this.daysOfWeek) {
+      const dayGroup = this.daysFormGroup.get(day);
+      if (dayGroup) {
+        dayGroup.reset({
+          enabled: false,
+          open: '',
+          closed: '',
+        });
+      }
+    }
+  }
 }

@@ -6,7 +6,8 @@
   --card-border-width: 1px;
   --card-border-style: solid;
   --card-border-color: var(--surface-border-color);
-  --card-border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
+  --card-border: var(--card-border-width) var(--card-border-style)
+    var(--card-border-color);
 
   // Header properties
   --card-header-margin-bottom: var(--spacing-md);

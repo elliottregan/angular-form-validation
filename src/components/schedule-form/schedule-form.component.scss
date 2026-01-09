@@ -4,6 +4,11 @@
 
   // Button group properties
   --button-group-margin-top: var(--spacing-lg);
+  --button-group-gap: var(--spacing-sm);
+
+  // Quick actions properties
+  --quick-actions-margin-top: var(--spacing-md);
+  --quick-actions-gap: var(--spacing-sm);
 
   // Submit button properties
   --submit-button-padding: var(--spacing-sm) var(--spacing-md);
@@ -12,13 +17,51 @@
   --submit-button-border: none;
   --submit-button-border-radius: var(--spacing-xs);
   --submit-button-cursor: pointer;
+
+  // Reset button properties
+  --reset-button-padding: var(--spacing-sm) var(--spacing-md);
+  --reset-button-bg: transparent;
+  --reset-button-color: var(--text-color-muted);
+  --reset-button-border: 1px solid var(--border-color);
+  --reset-button-border-radius: var(--spacing-xs);
+  --reset-button-cursor: pointer;
+
+  // Action button properties
+  --action-button-padding: var(--spacing-xs) var(--spacing-sm);
+  --action-button-bg: transparent;
+  --action-button-color: var(--text-color-primary);
+  --action-button-border: 1px solid var(--border-color);
+  --action-button-border-radius: var(--spacing-xs);
+  --action-button-cursor: pointer;
 }
 
 .form-container {
   margin-bottom: var(--form-container-margin-bottom);
 }
 
+.quick-actions {
+  display: flex;
+  gap: var(--quick-actions-gap);
+  margin-top: var(--quick-actions-margin-top);
+}
+
+.action-button {
+  padding: var(--action-button-padding);
+  background-color: var(--action-button-bg);
+  color: var(--action-button-color);
+  border: var(--action-button-border);
+  border-radius: var(--action-button-border-radius);
+  cursor: var(--action-button-cursor);
+  font-size: 0.875rem;
+
+  &:hover {
+    background-color: var(--bg-color-secondary);
+  }
+}
+
 .button-group {
+  display: flex;
+  gap: var(--button-group-gap);
   margin-top: var(--button-group-margin-top);
 }
 
@@ -29,4 +72,17 @@
   border: var(--submit-button-border);
   border-radius: var(--submit-button-border-radius);
   cursor: var(--submit-button-cursor);
+}
+
+.reset-button {
+  padding: var(--reset-button-padding);
+  background-color: var(--reset-button-bg);
+  color: var(--reset-button-color);
+  border: var(--reset-button-border);
+  border-radius: var(--reset-button-border-radius);
+  cursor: var(--reset-button-cursor);
+
+  &:hover {
+    background-color: var(--bg-color-secondary);
+  }
 }

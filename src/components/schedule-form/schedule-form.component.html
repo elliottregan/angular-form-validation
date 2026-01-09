@@ -3,11 +3,29 @@
 }
 
 <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" class="form-container">
-  <app-days-form-group #daysFormGroupComponent formControlName="days"></app-days-form-group>
+  <app-days-form-group
+    #daysFormGroupComponent
+    formControlName="days"
+  ></app-days-form-group>
+
+  <div class="quick-actions">
+    <button type="button" class="action-button" (click)="enableAllDays()">
+      Enable All Days
+    </button>
+    <button type="button" class="action-button" (click)="disableAllDays()">
+      Disable All Days
+    </button>
+  </div>
 
   <div class="button-group">
     <button type="submit" class="submit-button">Save Schedule</button>
+    <button type="button" class="reset-button" (click)="resetForm()">
+      Reset
+    </button>
   </div>
 </form>
 
-<app-debug-section [form]="daysFormGroupComponent?.internalFormGroup || scheduleForm"> </app-debug-section>
+<app-debug-section
+  [form]="daysFormGroupComponent?.internalFormGroup || scheduleForm"
+>
+</app-debug-section>

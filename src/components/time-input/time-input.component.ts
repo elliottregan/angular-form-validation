@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 let nextId = 0;
@@ -7,7 +7,7 @@ let nextId = 0;
 @Component({
   selector: 'app-time-input',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './time-input.component.html',
   styleUrl: './time-input.component.scss',
   providers: [
