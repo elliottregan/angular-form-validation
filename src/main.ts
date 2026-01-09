@@ -1,7 +1,7 @@
 import { Component, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
@@ -33,6 +33,6 @@ bootstrapApplication(App, {
   providers: [
     provideZoneChangeDetection(),
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
   ],
 });
