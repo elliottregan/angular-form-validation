@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { CardComponent } from '../../components/card/card.component';
 
@@ -28,7 +29,7 @@ interface User {
 @Component({
   selector: 'app-resource-demo-page',
   standalone: true,
-  imports: [FormsModule, PageHeaderComponent, CardComponent],
+  imports: [FormsModule, JsonPipe, PageHeaderComponent, CardComponent],
   templateUrl: './resource-demo.page.html',
   styleUrl: './resource-demo.page.scss',
 })
@@ -57,6 +58,15 @@ export class ResourceDemoPage {
     method: 'GET',
   }));
 
+  /** Computed state summary for debugging display */
+  resourceState = computed(() => ({
+    status: this.userResource.status(),
+    isLoading: this.userResource.isLoading(),
+    hasValue: this.userResource.hasValue(),
+    value: this.userResource.value(),
+    error: this.userResource.error(),
+  }));
+
   /**
    * Updates the selected user ID, which automatically triggers
    * the userResource to refetch due to signal reactivity.
@@ -70,5 +80,13 @@ export class ResourceDemoPage {
    */
   reloadUser(): void {
     this.userResource.reload();
+  }
+
+  /**
+   * Triggers an error by fetching a non-existent user ID.
+   * The API returns 404 for user IDs that don't exist.
+   */
+  triggerError(): void {
+    this.userId.set(999);
   }
 }

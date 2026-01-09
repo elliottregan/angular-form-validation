@@ -46,8 +46,14 @@
   }
 }
 
-.reload-button {
-  align-self: flex-start;
+.action-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.reload-button,
+.error-button {
   padding: var(--spacing-xs) var(--spacing-sm);
   background-color: transparent;
   color: var(--text-color-primary);
@@ -59,6 +65,89 @@
   &:hover {
     background-color: var(--bg-color-secondary);
   }
+}
+
+.error-button {
+  border-color: oklch(0.7 0.15 25);
+  color: oklch(0.45 0.2 25);
+
+  &:hover {
+    background-color: oklch(0.95 0.05 25);
+  }
+}
+
+// Resource State Debug Panel
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.state-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background-color: var(--bg-color-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--spacing-xs);
+
+  &.full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+.state-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-color-muted);
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.state-value {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.875rem;
+  word-break: break-word;
+
+  &.true {
+    color: oklch(0.5 0.2 140);
+  }
+
+  &.status-value {
+    text-transform: lowercase;
+
+    &[data-status='loading'] {
+      color: oklch(0.5 0.15 80);
+    }
+
+    &[data-status='error'] {
+      color: oklch(0.5 0.2 25);
+    }
+
+    &[data-status='resolved'] {
+      color: oklch(0.5 0.2 140);
+    }
+  }
+
+  &.error-value {
+    color: oklch(0.5 0.2 25);
+  }
+
+  &.json-value {
+    margin: 0;
+    padding: var(--spacing-sm);
+    background-color: var(--bg-color-tertiary, var(--bg-color-secondary));
+    border-radius: var(--spacing-xs);
+    overflow-x: auto;
+    max-height: 200px;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+}
+
+.null-value {
+  color: var(--text-color-muted);
+  font-style: italic;
 }
 
 .resource-status {

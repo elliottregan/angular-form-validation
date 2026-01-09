@@ -24,9 +24,65 @@
           </button>
         }
       </div>
-      <button type="button" class="reload-button" (click)="reloadUser()">
-        Reload Current User
-      </button>
+      <div class="action-buttons">
+        <button type="button" class="reload-button" (click)="reloadUser()">
+          Reload Current User
+        </button>
+        <button type="button" class="error-button" (click)="triggerError()">
+          Trigger Error (ID: 999)
+        </button>
+      </div>
+    </div>
+  </app-card>
+
+  <!-- Resource State Debug Panel -->
+  <app-card title="Resource State (Debug)" [level]="2">
+    <p class="description">
+      This panel shows the raw resource state values. Try clicking "Trigger
+      Error" to see how the state changes, then select a valid user to recover.
+    </p>
+    <div class="state-grid">
+      <div class="state-item">
+        <span class="state-label">userId()</span>
+        <span class="state-value">{{ userId() }}</span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">status()</span>
+        <span
+          class="state-value status-value"
+          [attr.data-status]="userResource.status()"
+        >
+          {{ userResource.status() }}
+        </span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">isLoading()</span>
+        <span class="state-value" [class.true]="userResource.isLoading()">
+          {{ userResource.isLoading() }}
+        </span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">hasValue()</span>
+        <span class="state-value" [class.true]="userResource.hasValue()">
+          {{ userResource.hasValue() }}
+        </span>
+      </div>
+      <div class="state-item full-width">
+        <span class="state-label">error()</span>
+        <span class="state-value error-value">
+          @if (userResource.error()) {
+            {{ userResource.error() }}
+          } @else {
+            <span class="null-value">null</span>
+          }
+        </span>
+      </div>
+      <div class="state-item full-width">
+        <span class="state-label">value()</span>
+        <pre class="state-value json-value">{{
+          resourceState().value | json
+        }}</pre>
+      </div>
     </div>
   </app-card>
 
