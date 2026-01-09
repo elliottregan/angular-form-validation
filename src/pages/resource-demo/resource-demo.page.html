@@ -108,6 +108,96 @@
     </div>
   </app-card>
 
+  <!-- Apollo GraphQL-style Response -->
+  <app-card title="Apollo GraphQL Response (Debug)" [level]="2">
+    <p class="description">
+      This demonstrates GraphQL Apollo-style responses where errors are returned
+      in the response body (HTTP 200) rather than as HTTP errors. The response
+      always has <code>&#123; data, errors &#125;</code> structure.
+    </p>
+
+    <div class="apollo-comparison">
+      <div class="comparison-column">
+        <h4 class="comparison-title">Resource Status</h4>
+        <div class="state-grid compact">
+          <div class="state-item">
+            <span class="state-label">status()</span>
+            <span
+              class="state-value status-value"
+              [attr.data-status]="apolloState().status"
+            >
+              {{ apolloState().status }}
+            </span>
+          </div>
+          <div class="state-item">
+            <span class="state-label">hasValue()</span>
+            <span class="state-value" [class.true]="apolloState().hasValue">
+              {{ apolloState().hasValue }}
+            </span>
+          </div>
+          <div class="state-item">
+            <span class="state-label">hasErrors</span>
+            <span
+              class="state-value"
+              [class.true]="!apolloState().hasErrors"
+              [class.error-value]="apolloState().hasErrors"
+            >
+              {{ apolloState().hasErrors }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="apollo-response-panel">
+      <h4 class="response-title">Full Response</h4>
+      <pre class="apollo-response">{{ apolloState().response | json }}</pre>
+    </div>
+
+    <div class="apollo-sections">
+      <div class="apollo-section" [class.has-data]="apolloState().data">
+        <h4 class="section-title">response.data</h4>
+        @if (apolloState().data) {
+          <pre class="section-content">{{ apolloState().data | json }}</pre>
+        } @else {
+          <p class="null-value">null</p>
+        }
+      </div>
+
+      <div class="apollo-section" [class.has-errors]="apolloState().hasErrors">
+        <h4 class="section-title">
+          response.errors
+          @if (apolloState().hasErrors) {
+            <span class="error-count">({{ apolloState().errors.length }})</span>
+          }
+        </h4>
+        @if (apolloState().hasErrors) {
+          @for (error of apolloState().errors; track $index) {
+            <div class="graphql-error">
+              <p class="error-message">{{ error.message }}</p>
+              @if (error.path) {
+                <p class="error-path">Path: {{ error.path.join('.') }}</p>
+              }
+              @if (error.extensions) {
+                <pre class="error-extensions">{{
+                  error.extensions | json
+                }}</pre>
+              }
+            </div>
+          }
+        } @else {
+          <p class="empty-array">[] (empty)</p>
+        }
+      </div>
+    </div>
+
+    <p class="note">
+      Notice: With GraphQL, <code>status()</code> is always "resolved" and
+      <code>hasValue()</code> is always true (HTTP 200). You must check
+      <code>response.errors</code> to detect failures!
+    </p>
+  </app-card>
+
   <!-- Single User Resource -->
   <app-card title="User Details (httpResource)" [level]="2">
     <div class="resource-status">

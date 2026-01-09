@@ -17,6 +17,22 @@ interface User {
   };
 }
 
+/** GraphQL-style error object */
+interface GraphQLError {
+  message: string;
+  path?: string[];
+  extensions?: {
+    code: string;
+    [key: string]: unknown;
+  };
+}
+
+/** Apollo-style GraphQL response */
+interface GraphQLResponse<T> {
+  data: T | null;
+  errors: GraphQLError[];
+}
+
 /**
  * Demonstrates Angular's Resource API (httpResource) for reactive data fetching.
  *
@@ -25,6 +41,7 @@ interface User {
  * - Automatic refetching when signal dependencies change
  * - Loading, error, and success states via signals
  * - Integration with Angular's signal-based reactivity
+ * - GraphQL Apollo-style response handling
  */
 @Component({
   selector: 'app-resource-demo-page',
@@ -57,6 +74,45 @@ export class ResourceDemoPage {
     method: 'GET',
   }));
 
+  /**
+   * GraphQL Apollo-style resource that returns { data, errors } format.
+   * This simulates how a real GraphQL API would return errors in the response body
+   * rather than as HTTP errors.
+   *
+   * Uses the `parse` option to transform the raw response into Apollo format.
+   */
+  apolloResource = httpResource<GraphQLResponse<User>>(() => {
+    const errorMode = this.simulateError();
+    return {
+      url: `https://jsonplaceholder.typicode.com/users/${this.userId()}`,
+      method: 'GET',
+      // Parse transforms the successful HTTP response into Apollo format
+      parse: (response: unknown): GraphQLResponse<User> => {
+        if (errorMode) {
+          // Simulate GraphQL error response (HTTP 200 but with errors array)
+          return {
+            data: null,
+            errors: [
+              {
+                message: `User with ID ${this.userId()} could not be fetched`,
+                path: ['user'],
+                extensions: {
+                  code: 'USER_NOT_FOUND',
+                  userId: this.userId(),
+                },
+              },
+            ],
+          };
+        }
+        // Successful response wraps data in Apollo format
+        return {
+          data: response as User,
+          errors: [],
+        };
+      },
+    };
+  });
+
   /** Resource for fetching all users */
   allUsersResource = httpResource<User[]>(() => ({
     url: 'https://jsonplaceholder.typicode.com/users',
@@ -71,6 +127,19 @@ export class ResourceDemoPage {
     hasValue: this.userResource.hasValue(),
     value: this.userResource.value(),
     error: this.userResource.error(),
+  }));
+
+  /** Computed state for Apollo-style resource */
+  apolloState = computed(() => ({
+    status: this.apolloResource.status(),
+    isLoading: this.apolloResource.isLoading(),
+    hasValue: this.apolloResource.hasValue(),
+    // The value IS the full GraphQL response with data and errors
+    response: this.apolloResource.value(),
+    // Convenience accessors for the nested values
+    data: this.apolloResource.value()?.data ?? null,
+    errors: this.apolloResource.value()?.errors ?? [],
+    hasErrors: (this.apolloResource.value()?.errors?.length ?? 0) > 0,
   }));
 
   /**

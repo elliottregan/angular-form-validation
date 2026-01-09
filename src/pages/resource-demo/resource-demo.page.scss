@@ -355,3 +355,136 @@ dd {
     font-family: 'Fira Code', 'Consolas', monospace;
   }
 }
+
+// Apollo GraphQL Response Styles
+.apollo-comparison {
+  margin-bottom: var(--spacing-md);
+}
+
+.comparison-title {
+  margin: 0 0 var(--spacing-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-color-muted);
+}
+
+.state-grid.compact {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.apollo-response-panel {
+  margin-bottom: var(--spacing-md);
+}
+
+.response-title {
+  margin: 0 0 var(--spacing-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-color-muted);
+}
+
+.apollo-response {
+  margin: 0;
+  padding: var(--spacing-sm);
+  background-color: var(--bg-color-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--spacing-xs);
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  max-height: 150px;
+}
+
+.apollo-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.apollo-section {
+  padding: var(--spacing-sm);
+  background-color: var(--bg-color-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--spacing-xs);
+
+  &.has-data {
+    border-color: oklch(0.7 0.15 140);
+    background-color: oklch(0.97 0.02 140);
+  }
+
+  &.has-errors {
+    border-color: oklch(0.7 0.15 25);
+    background-color: oklch(0.97 0.02 25);
+  }
+}
+
+.section-title {
+  margin: 0 0 var(--spacing-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.section-content {
+  margin: 0;
+  padding: var(--spacing-xs);
+  background-color: var(--bg-color-tertiary, rgba(0, 0, 0, 0.05));
+  border-radius: var(--spacing-xs);
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  max-height: 120px;
+}
+
+.empty-array {
+  margin: 0;
+  color: var(--text-color-muted);
+  font-style: italic;
+  font-size: 0.875rem;
+}
+
+.error-count {
+  color: oklch(0.5 0.2 25);
+  font-weight: normal;
+}
+
+.graphql-error {
+  padding: var(--spacing-sm);
+  background-color: var(--bg-color-tertiary, rgba(0, 0, 0, 0.05));
+  border-radius: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.graphql-error .error-message {
+  margin: 0 0 var(--spacing-xs);
+  font-weight: 500;
+  color: oklch(0.45 0.2 25);
+}
+
+.error-path {
+  margin: 0 0 var(--spacing-xs);
+  font-size: 0.75rem;
+  color: var(--text-color-muted);
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.error-extensions {
+  margin: 0;
+  padding: var(--spacing-xs);
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: var(--spacing-xs);
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
