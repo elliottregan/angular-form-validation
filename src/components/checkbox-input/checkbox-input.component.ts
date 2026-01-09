@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 let nextCheckboxId = 0;
@@ -7,7 +7,7 @@ let nextCheckboxId = 0;
 @Component({
   selector: 'app-checkbox-input',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './checkbox-input.component.html',
   styleUrl: './checkbox-input.component.scss',
   providers: [

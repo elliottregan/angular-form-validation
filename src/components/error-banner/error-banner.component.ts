@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormGroup } from '@angular/forms';
 import { DAYS_OF_WEEK } from '../../constants/schedule.constants';
 
 @Component({
   selector: 'app-error-banner',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './error-banner.component.html',
   styleUrl: './error-banner.component.scss',
 })

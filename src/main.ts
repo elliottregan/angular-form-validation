@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { LayoutComponent } from './components/layout/layout.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
@@ -31,4 +31,4 @@ import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switch
 })
 export class App {}
 
-bootstrapApplication(App);
+bootstrapApplication(App, { providers: [provideZoneChangeDetection()] });
